@@ -1,16 +1,37 @@
-# flutter_gallery
+# Flutter Gallery
 
-A new Flutter project.
+Gallery App.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Dart v2.16+
+- Flutter v2.10+
+- Android device or AVD
 
-A few resources to get you started if this is your first Flutter project:
+## Flutter Doctor
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Check for issues with flutter doctor:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```sh
+flutter doctor
+```
+
+## Run Flutter (Android)
+
+- Make sure to have an Android Virtual Device (installed from Android Studio) or a physical Android device connected.
+
+- Open the ```main.dart``` file in lib directory.
+
+- In VS Code, at bottom right, choose available Android device.
+
+- Press ```F5``` to run debugger.
+
+- Clean build for android build error (if necessary): ```cd android``` and then ```./gradle clean build```.
+
+## Run Flutter (Web App)
+
+- Create flutter for web: ```flutter create .```
+
+- In VS Code, at bottom right, choose ```Chrome (web)```.
+
+- Run flutter in web server: ```flutter run -d web-server```
