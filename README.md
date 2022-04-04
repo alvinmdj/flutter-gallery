@@ -10,11 +10,7 @@ Gallery App.
 
 ## Flutter Doctor
 
-- Check for issues with flutter doctor:
-
-```sh
-flutter doctor
-```
+- Check for issues with flutter doctor: ```flutter doctor```.
 
 ## Run Flutter (Android)
 
