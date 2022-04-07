@@ -31,3 +31,8 @@ Gallery App.
 - In VS Code, at bottom right, choose ```Chrome (web)```.
 
 - Run flutter in web server: ```flutter run -d web-server```
+
+## Clean build data
+
+- Run in terminal: ```flutter clean```.
+- Get pub: ```flutter pub get```.
