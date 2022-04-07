@@ -13,14 +13,14 @@ class ListScreen extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          // if (constraints.maxWidth <= 600) {
+          if (constraints.maxWidth <= 600) {
             return const GalleryPhotoList(gridCount: 2);
-          // } 
-          // else if (constraints.maxWidth <= 1200) {
-            // return const TourismPlaceGrid(gridCount: 4);
-          // } else {
-            // return const TourismPlaceGrid(gridCount: 6);
-          // }
+          } 
+          else if (constraints.maxWidth <= 1200) {
+            return const GalleryPhotoList(gridCount: 3);
+          } else {
+            return const GalleryPhotoList(gridCount: 4);
+          }
         }
       ),
     );
