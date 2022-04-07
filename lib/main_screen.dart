@@ -22,7 +22,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 3, 14, 118),
+      backgroundColor: Colors.blue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,6 +42,9 @@ class WelcomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(16),
               child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black12),
+                ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ListScreen();

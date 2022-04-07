@@ -37,11 +37,9 @@ class GalleryPhotoList extends StatelessWidget {
     return Scrollbar(
       isAlwaysShown: true,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(3),
         child: GridView.count(
           crossAxisCount: gridCount,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
           children: galleryPhotoList.map((photo) {
             return InkWell(
               onTap: () {
@@ -60,12 +58,37 @@ class GalleryPhotoList extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-                      child: Text(
-                        photo.name,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0, bottom: 10.0),
+                                child: Text(
+                                  photo.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
+                                child: LikeButton(),
+                              ),
+                            ]
+                          ),
+                        ],
+                      )
                     ),
                   ],
                 ),
@@ -74,6 +97,32 @@ class GalleryPhotoList extends StatelessWidget {
           }).toList(),
         ),
       ),
+    );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  const LikeButton({Key? key}) : super(key: key);
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool _isLiked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isLiked ? Icons.thumb_up_alt : Icons.thumb_up_off_alt,
+        color: _isLiked ? Colors.blue : Colors.grey,
+      ),
+      onPressed: () {
+        setState(() {
+          _isLiked = !_isLiked;
+        });
+      },
     );
   }
 }

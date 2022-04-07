@@ -11,7 +11,7 @@ class DetailScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         // if (constraints.maxWidth <= 600) {
-          return const DetailMobilePage();
+          return DetailMobilePage(photo: photo);
         // }
         // else if (constraints.maxWidth <= 1200) {
         //   return const TourismPlaceGrid(gridCount: 4);
@@ -24,15 +24,105 @@ class DetailScreen extends StatelessWidget {
 }
 
 class DetailMobilePage extends StatelessWidget {
-  const DetailMobilePage({Key? key}) : super(key: key);
+  final GalleryPhoto photo;
+
+  const DetailMobilePage({Key? key, required this.photo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Gallery'),
+        title: Text(photo.name),
       ),
-      body: const Text('Detail Mobile Page'),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    photo.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ]
+            ),
+            const SizedBox(height: 16),
+            Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      photo.name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      photo.description,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      'Date taken : ' + photo.dateTaken,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: LikeButton(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  const LikeButton({Key? key}) : super(key: key);
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool _isLiked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: _isLiked ? MaterialStateProperty.all<Color>(Colors.black12) : MaterialStateProperty.all<Color>(Colors.blue),
+      ),
+      onPressed: () {
+        setState(() {
+          _isLiked = !_isLiked;
+        });
+      },
+      child: Text(_isLiked ? 'Unlike this photo' : 'Like this photo'),
     );
   }
 }
