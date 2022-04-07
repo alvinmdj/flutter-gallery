@@ -10,14 +10,11 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        // if (constraints.maxWidth <= 600) {
+        if (constraints.maxWidth <= 600) {
           return DetailMobilePage(photo: photo);
-        // }
-        // else if (constraints.maxWidth <= 1200) {
-        //   return const TourismPlaceGrid(gridCount: 4);
-        // } else {
-        //   return const TourismPlaceGrid(gridCount: 6);
-        // }
+        } else {
+          return DetailWebPage(photo: photo);
+        }
       },
     );
   }
@@ -93,6 +90,89 @@ class DetailMobilePage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailWebPage extends StatelessWidget {
+  final GalleryPhoto photo;
+
+  const DetailWebPage({Key? key, required this.photo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(photo.name),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        photo.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            photo.name,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            photo.description,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            'Date taken : ' + photo.dateTaken,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          child: const LikeButton(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 40),
+              ],
             ),
           ],
         ),
